@@ -1,21 +1,22 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
 public class InterFace {
 
-    public void print(FightLog fightLog) {
-        for (int i = 0; i < fightLog.getLastEventIndex(); i++)
-            System.out.println(fightLog.getEvents(i));
+    public void print(String[] fightLog) {
+        for (String s : fightLog) {
+            System.out.println(s);
+        }
 
-        System.out.println("The winner is " + fightLog.getWinner().getName());
-        System.out.println("The looser is " + fightLog.getLooser().getName());
+
 
     }
 
     public void scan() {
-        int userChoice = -1;
+        int userChoice;
         String enterName;
         int enterHealthPoints;
         int enterDamagePoints;
@@ -45,6 +46,7 @@ public class InterFace {
                 Units unit2 = new Units(enterName, enterHealthPoints, enterDamagePoints);
 
                 equalsMain(unit1, unit2);
+
             }
 
             if (userChoice == 2) {
@@ -78,8 +80,8 @@ public class InterFace {
 
     private void equalsMain(Units unit1, Units unit2) {
         BattleService battleService = new BattleService();
-        FightLog fightLog = battleService.fight(unit1, unit2);
-        print(fightLog);
+        String[] fightLogs = battleService.fight(unit1, unit2).toArray(new String[0]);
+        print(fightLogs);
     }
 
 
