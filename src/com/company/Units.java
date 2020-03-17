@@ -1,6 +1,8 @@
 package com.company;
 
 public class Units {
+    private int currentHealth;
+    public static final int MIN_HP=0;
     private String name;
     private int healthPoints;
     private int damagePoints;
@@ -10,6 +12,7 @@ public class Units {
         this.name = name;
         setHealthPoints(healthPoints);
         setDamagePoints(damagePoints);
+        currentHealth =healthPoints;
 
     }
 
@@ -33,7 +36,15 @@ public class Units {
         return damagePoints;
     }
 
+    public void decreaseCurrentHealth(int damage){
+        if (currentHealth < MIN_HP)
+            return;
+        currentHealth-=damage;
 
+    }
+    public int getCurrentHealth(){
+        return currentHealth;
+    }
 }
 
 
