@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -17,6 +18,7 @@ public class InterFace {
     private static final String ENTER_NAME = "Enter the name of the %s warrior : ";
     private static final String ENTER_HEALTH_POINTS = "Enter the health points of the %s warrior : ";
     private static final String ENTER_DAMAGE_POINTS = "Enter the damage points of the %s warrior : ";
+    public static final String WRONG_NUMBER = "You enter a wrong number. Try again";
 
 
     public void scan() {
@@ -26,15 +28,15 @@ public class InterFace {
         userChoice = getUserChoice(scanner);
 
         while (userChoice != PROGRAM_EXIT) {
-            if (userChoice == CREATURE_UNITS)
+            if (userChoice == CREATURE_UNITS) {
                 createUnitsAndOutputToTheScreen(getEnterNameWarrior(scanner, "first"), getEnterHealthPoints(scanner, "first"), getEnterDamagePoints(scanner, "first"), getEnterNameWarrior(scanner, "second"), getEnterHealthPoints(scanner, "second"), getEnterDamagePoints(scanner, "second"));
-
-            if (userChoice == RANDOM_CREATURE_UNITS)
+            }
+            if (userChoice == RANDOM_CREATURE_UNITS) {
                 createRandomUnitsAndOutputToTheScreen();
-
-            if (userChoice >= UNRESOLVED_VALUE)
-                System.out.println("You enter a wrong number. Try again");
-
+            }
+            if (userChoice >= UNRESOLVED_VALUE) {
+                System.out.println(WRONG_NUMBER);
+            }
             userChoice = getUserChoice(scanner);
         }
 
@@ -46,13 +48,13 @@ public class InterFace {
         Random random = new Random();
         Units unit1 = new Units("Unit1", random.nextInt(MAX_HEALTH_POINTS_VALUE) + MIN_HP_AND_DP_VALUE, random.nextInt(MAX_DAMAGE_POINTS_VALUE) + MIN_HP_AND_DP_VALUE);
         Units unit2 = new Units("Unit2", random.nextInt(MAX_HEALTH_POINTS_VALUE) + MIN_HP_AND_DP_VALUE, random.nextInt(MAX_DAMAGE_POINTS_VALUE) + MIN_HP_AND_DP_VALUE);
-        equalsMain(unit1, unit2);
+        createBattleArea(unit1, unit2);
     }
 
-    private void createUnitsAndOutputToTheScreen(String first, int first2, int first3, String second, int second2, int second3) {
-        Units unit1 = new Units(first, first2, first3);
-        Units unit2 = new Units(second, second2, second3);
-        equalsMain(unit1, unit2);
+    private void createUnitsAndOutputToTheScreen(String firstName, int firstHealth, int firstDamage, String secondName, int secondHealth, int secondDamage) {
+        Units unit1 = new Units(firstName, firstHealth, firstDamage);
+        Units unit2 = new Units(secondName, secondHealth, secondDamage);
+        createBattleArea(unit1, unit2);
     }
 
     private int getEnterDamagePoints(Scanner scanner, String number) {
@@ -88,9 +90,9 @@ public class InterFace {
 
     }
 
-    private void equalsMain(Units unit1, Units unit2) {
+    private void createBattleArea(Units unit1, Units unit2) {
         BattleService battleService = new BattleService();
-        ArrayList<String> fightLog = battleService.fight(unit1, unit2);
+        List<String> fightLog = battleService.fight(unit1, unit2);
         System.out.println(fightLog);
 
     }

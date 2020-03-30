@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class BattleService {
@@ -17,7 +18,7 @@ public class BattleService {
     private static Random randomNumberGenerator = new Random();
 
 
-    public ArrayList<String> fight(Units attacker, Units defender) {
+    public List<String> fight(Units attacker, Units defender) {
         FightLog fightLog = new FightLog();
         ArrayList<String> fightLogs = new ArrayList<>();
 
